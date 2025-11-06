@@ -1,72 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
-// const axios = require("axios");
-// require("dotenv").config();
-
-// console.log("🟢 Starting backend...");
-
-// const app = express();
-
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["Content-Type"],
-//   })
-// );
-// app.use(express.json());
-
-// app.get("/", (req, res) => {
-//   res.send("🚀 Gemini REST API backend is running successfully!");
-// });
-// app.post("/analyze", async (req, res) => {
-//   const { code } = req.body;
-//   if (!code) return res.status(400).json({ error: "No code provided" });
-
-//   try {
-//     const prompt = `
-// You are a senior software engineer.
-// Please review this code and provide:
-// 1. Bugs or syntax issues
-// 2. Security or logical problems
-// 3. Suggestions for improvement
-
-// Code:
-// ${code}
-//     `;
-
-//     // ✅ Using your supported model: gemini-2.5-flash
-//     const response = await axios.post(
-//       "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent",
-//       {
-//         contents: [{ parts: [{ text: prompt }] }],
-//       },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           "x-goog-api-key": process.env.GEMINI_API_KEY,
-//         },
-//       }
-//     );
-
-//     const aiResponse =
-//       response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
-//       "No response text from Gemini.";
-
-//     res.json({ review: aiResponse });
-//   } catch (error) {
-//     console.error(
-//       "❌ Gemini REST API Error:",
-//       error.response?.status,
-//       error.response?.data || error.message
-//     );
-//     res.status(500).json({ error: "Gemini request failed" });
-//   }
-// });
-// console.log("🚀 About to start Express server...");
-// const PORT = 5000;
-// app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-
 
 const express = require("express");
 const cors = require("cors");
@@ -77,14 +8,15 @@ console.log("🟢 Starting backend...");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+// ✅ Allow all origins (for now)
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+}));
+
 app.use(express.json());
+
 
 app.get("/", (req, res) => {
   res.send("🚀 Gemini REST API backend is running successfully!");
