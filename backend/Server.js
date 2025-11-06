@@ -8,19 +8,20 @@ console.log("🟢 Starting backend...");
 
 const app = express();
 
-// ✅ Allow all origins (for now)
+// ✅ Fixed CORS Setup
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://localhost:3001",
       "https://ai-code-review-assistant.vercel.app",
       "https://ai-code-review-backend-6u1r.onrender.com",
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
+    credentials: true,
   })
 );
-
 
 app.use(express.json());
 
